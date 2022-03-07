@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <script src="./javascript/jquery.js"></script>
+        <link rel="stylesheet" href="./css/style.css" />
+        <title> Casabatllo INFO </title>
+    </head>
+
+    <body>
+        <div class="container">
+            <div>
+                <img src="./images/cat/CAT-slide-01-HR.png" id="main" class="main_image">
+            </div>
+
+            <div>
+                <div>
+                    <img src="./images/arrow_left_t.png" id="left_pager" class="left_page_btn">
+                    <img src="./images/arrow_right_t.png" id="right_pager" class="right_page_btn">
+                </div>
+            </div>
+
+            <div class="btn_container">
+                <button class="btn_size select" id="cat">CAT</button>
+                <button class="btn_size" id="kor">KOR</button>
+                <button class="btn_size" id="eng">ENG</button>
+                <button class="btn_size" id="esp">ESP</button>
+            </div>
+        </div>
+
+        <script>
+
+            const catImage = [
+            './images/cat/CAT-slide-01-HR.png',
+            './images/cat/CAT-slide-02-HR.png',
+            './images/cat/CAT-slide-03-HR.png',
+            './images/cat/CAT-slide-04-HR.png',
+            './images/cat/CAT-slide-05-HR.png',
+            ]
+
+            const korImage = [
+            './images/cor/COR-slide-01-HR.png',
+            './images/cor/COR-slide-02-HR.png',
+            './images/cor/COR-slide-03-HR.png',
+            './images/cor/COR-slide-04-HR.png',
+            './images/cor/COR-slide-05-HR.png',
+            ]
+
+            const engImage = [
+            './images/eng/ENG-slide-01-HR.png',
+            './images/eng/ENG-slide-02-HR.png',
+            './images/eng/ENG-slide-03-HR.png',
+            './images/eng/ENG-slide-04-HR.png',
+            './images/eng/ENG-slide-05-HR.png',
+            ]
+
+            const espImage = [
+            './images/esp/ESP-slide-01-HR.png',
+            './images/esp/ESP-slide-02-HR.png',
+            './images/esp/ESP-slide-03-HR.png',
+            './images/esp/ESP-slide-04-HR.png',
+            './images/esp/ESP-slide-05-HR.png',
+            ]
+
+            var seleteLang = [
+            './images/cat/CAT-slide-01-HR.png',
+            './images/cat/CAT-slide-02-HR.png',
+            './images/cat/CAT-slide-03-HR.png',
+            './images/cat/CAT-slide-04-HR.png',
+            './images/cat/CAT-slide-05-HR.png',
+            ]
+
+            var pagerCount = 0;
+
+            $("#cat").click(function () {
+                seleteLang = catImage
+
+                $("#main").attr('src', seleteLang[pagerCount])
+                $("#cat").addClass('select')
+                $("#kor").removeClass('select')
+                $("#eng").removeClass('select')
+                $("#esp").removeClass('select')
+            })
+            $("#kor").click(function () {
+                seleteLang = korImage
+
+                $("#main").attr('src', seleteLang[pagerCount])
+                $("#cat").removeClass('select')
+                $("#kor").addClass('select')
+                $("#eng").removeClass('select')
+                $("#esp").removeClass('select')
+            })
+            $("#eng").click(function () {
+                seleteLang = engImage
+
+                $("#main").attr('src', seleteLang[pagerCount])
+                $("#cat").removeClass('select')
+                $("#kor").removeClass('select')
+                $("#eng").addClass('select')
+                $("#esp").removeClass('select')
+            })
+            $("#esp").click(function () {
+                seleteLang = espImage
+
+                $("#main").attr('src', seleteLang[pagerCount])
+                $("#cat").removeClass('select')
+                $("#kor").removeClass('select')
+                $("#eng").removeClass('select')
+                $("#esp").addClass('select')
+            })
+
+            $("#left_pager").click(function () {
+                pagerCount -= 1;
+
+                if (pagerCount == -1) {
+                    pagerCount = catImage.length - 1
+                }
+
+                $("#main").attr('src', seleteLang[pagerCount])
+            })
+
+            $("#right_pager").click(function () {
+                pagerCount += 1;
+
+                if (pagerCount == catImage.length) {
+                    pagerCount = 0
+                }
+
+                $("#main").attr('src', seleteLang[pagerCount])
+            })
+
+        </script>
+    </body>
+</html>
