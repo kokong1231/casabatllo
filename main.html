@@ -8,7 +8,8 @@
     <body>
         <div class="container">
             <div>
-                <img src="./images/cat/CAT-slide-01-HR.png" id="main" class="main_image">
+                <video src="./images/cat/CAT_video_totem.mp4" id="main_video" loop class="main_image" style="display: none;" autoplay muted></video>
+                <img src="./images/cat/CAT-slide-01-HR.png" id="main" style="display: block;" class="main_image">
             </div>
 
             <div>
@@ -33,7 +34,7 @@
             './images/cat/CAT-slide-02-HR.png',
             './images/cat/CAT-slide-03-HR.png',
             './images/cat/CAT-slide-04-HR.png',
-            './images/cat/CAT-slide-05-HR.png',
+            './images/cat/CAT_video_totem.mp4'
             ]
 
             const korImage = [
@@ -41,7 +42,7 @@
             './images/cor/COR-slide-02-HR.png',
             './images/cor/COR-slide-03-HR.png',
             './images/cor/COR-slide-04-HR.png',
-            './images/cor/COR-slide-05-HR.png',
+            './images/cor/KOR_video_totem.mp4'
             ]
 
             const engImage = [
@@ -49,7 +50,7 @@
             './images/eng/ENG-slide-02-HR.png',
             './images/eng/ENG-slide-03-HR.png',
             './images/eng/ENG-slide-04-HR.png',
-            './images/eng/ENG-slide-05-HR.png',
+            './images/eng/ENG_video_totem.mp4'
             ]
 
             const espImage = [
@@ -57,7 +58,7 @@
             './images/esp/ESP-slide-02-HR.png',
             './images/esp/ESP-slide-03-HR.png',
             './images/esp/ESP-slide-04-HR.png',
-            './images/esp/ESP-slide-05-HR.png',
+            './images/esp/ESP_video_totem.mp4'
             ]
 
             var seleteLang = [
@@ -65,7 +66,7 @@
             './images/cat/CAT-slide-02-HR.png',
             './images/cat/CAT-slide-03-HR.png',
             './images/cat/CAT-slide-04-HR.png',
-            './images/cat/CAT-slide-05-HR.png',
+            './images/cat/CAT_video_totem.mp4'
             ]
 
             var pagerCount = 0;
@@ -74,6 +75,7 @@
                 seleteLang = catImage
 
                 $("#main").attr('src', seleteLang[pagerCount])
+                $("#main_video").attr('src', seleteLang[4])
                 $("#cat").addClass('select')
                 $("#kor").removeClass('select')
                 $("#eng").removeClass('select')
@@ -83,6 +85,7 @@
                 seleteLang = korImage
 
                 $("#main").attr('src', seleteLang[pagerCount])
+                $("#main_video").attr('src', seleteLang[4])
                 $("#cat").removeClass('select')
                 $("#kor").addClass('select')
                 $("#eng").removeClass('select')
@@ -92,6 +95,7 @@
                 seleteLang = engImage
 
                 $("#main").attr('src', seleteLang[pagerCount])
+                $("#main_video").attr('src', seleteLang[4])
                 $("#cat").removeClass('select')
                 $("#kor").removeClass('select')
                 $("#eng").addClass('select')
@@ -101,6 +105,7 @@
                 seleteLang = espImage
 
                 $("#main").attr('src', seleteLang[pagerCount])
+                $("#main_video").attr('src', seleteLang[4])
                 $("#cat").removeClass('select')
                 $("#kor").removeClass('select')
                 $("#eng").removeClass('select')
@@ -108,24 +113,69 @@
             })
 
             $("#left_pager").click(function () {
+                left_page(true)
+            })
+
+            $("#right_pager").click(function () {
+                right_page(true)
+            })
+            
+            autoPager(pagerCount)
+
+            function autoPager(num, touch) {
+                var timeSet = 5000
+                
+                if (num == 4) {
+                    timeSet = 20000
+                }
+
+                if (!touch) {
+                    const autoTimer = setTimeout(function() {
+                        right_page(false)
+                    }, timeSet)
+                }
+            }
+
+            function left_page(touch) {
                 pagerCount -= 1;
 
                 if (pagerCount == -1) {
                     pagerCount = catImage.length - 1
+                    console.log(pagerCount);
+                }
+
+                if (pagerCount === 4) {
+                    $("#main_video").css('display', 'block')
+                    $("#main").css('display', 'none')
+                    autoPager(pagerCount, touch)
+                } else {
+                    $("#main").css('display', 'block')
+                    $("#main_video").css('display', 'none')
+                    autoPager(pagerCount, touch)
                 }
 
                 $("#main").attr('src', seleteLang[pagerCount])
-            })
+            }
 
-            $("#right_pager").click(function () {
+            function right_page(touch) {
                 pagerCount += 1;
 
                 if (pagerCount == catImage.length) {
                     pagerCount = 0
                 }
 
+                if (pagerCount === 4) {
+                    $("#main_video").css('display', 'block')
+                    $("#main").css('display', 'none')
+                    autoPager(pagerCount, touch)
+                } else {
+                    $("#main").css('display', 'block')
+                    $("#main_video").css('display', 'none')
+                    autoPager(pagerCount, touch)
+                }
+
                 $("#main").attr('src', seleteLang[pagerCount])
-            })
+            }
 
         </script>
     </body>
