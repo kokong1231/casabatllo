@@ -1,15 +1,25 @@
 <html>
     <head>
         <script src="./javascript/jquery.js"></script>
+        <script src="./dist/jquery.bxslider.js"></script>
+        <script src="./dist/vendor/jquery.fitvids.js"></script>
         <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="./dist/jquery.bxslider.min.css">
         <title> Casabatllo INFO </title>
     </head>
 
     <body>
         <div class="container">
-            <div>
-                <video src="./images/cat/CAT_video_totem.mp4" id="main_video" loop class="main_image" style="display: none;" autoplay muted></video>
-                <img src="./images/cat/CAT-slide-01-HR.png" id="main" style="display: block;" class="main_image">
+            <div class="slider">
+                <img src='./images/cat/CAT-slide-01-HR.png' id="maina" style="display: block;" class="main_image">
+                <img src='./images/cat/CAT-slide-02-HR.png' id="mainb" style="display: block;" class="main_image">
+                <img src='./images/cat/CAT-slide-03-HR.png' id="mainc" style="display: block;" class="main_image">
+                <img src='./images/cat/CAT-slide-04-HR.png' id="maind" style="display: block;" class="main_image">
+                <video src='./images/cat/CAT_video_totem.mp4' id="main_video" loop class="main_image" autoplay muted>
+            </div>
+
+            <div style="display: none;" id="page">
+
             </div>
 
             <div>
@@ -28,6 +38,48 @@
         </div>
 
         <script>
+            var slider = $('.slider').bxSlider({
+                auto: true,
+                speed: 0,
+                mode: 'horizontal',
+                autoControls: false,
+                pager: false,
+                captions: false,
+                video: true,
+                wrapperClass: 'bx-wrapper',
+                slideMargin: 0,
+                touchEnabled: false,
+                prevSelector: 'left_pager',
+                nextSelector: 'right_pager',
+                onSlideNext: function(newIndex) {
+                    if (newIndex[0]['id'] === 'main_video') {
+                        slider.stopAuto()
+                        setTimeout(function () {
+                            slider.startAuto()
+                        }, 15000)
+                    } else {
+                        slider.startAuto()
+                    }
+
+                    return true;
+                },
+                onSlidePrev: function(newIndex) { 
+                    if (newIndex[0]['id'] === 'main_video') {
+                        slider.stopAuto()
+                        setTimeout(function () {
+                            slider.startAuto()
+                        }, 15000)
+                    } else {
+                        slider.startAuto()
+                    }
+
+                    return true; 
+                },
+            });
+
+            $(document).ready(function(){
+                slider
+            });
 
             const catImage = [
             './images/cat/CAT-slide-01-HR.png',
@@ -69,12 +121,13 @@
             './images/cat/CAT_video_totem.mp4'
             ]
 
-            var pagerCount = 0;
-
             $("#cat").click(function () {
                 seleteLang = catImage
 
-                $("#main").attr('src', seleteLang[pagerCount])
+                $("#maina").attr('src', seleteLang[0])
+                $("#mainb").attr('src', seleteLang[1])
+                $("#mainc").attr('src', seleteLang[2])
+                $("#maind").attr('src', seleteLang[3])
                 $("#main_video").attr('src', seleteLang[4])
                 $("#cat").addClass('select')
                 $("#kor").removeClass('select')
@@ -84,7 +137,10 @@
             $("#kor").click(function () {
                 seleteLang = korImage
 
-                $("#main").attr('src', seleteLang[pagerCount])
+                $("#maina").attr('src', seleteLang[0])
+                $("#mainb").attr('src', seleteLang[1])
+                $("#mainc").attr('src', seleteLang[2])
+                $("#maind").attr('src', seleteLang[3])
                 $("#main_video").attr('src', seleteLang[4])
                 $("#cat").removeClass('select')
                 $("#kor").addClass('select')
@@ -94,7 +150,10 @@
             $("#eng").click(function () {
                 seleteLang = engImage
 
-                $("#main").attr('src', seleteLang[pagerCount])
+                $("#maina").attr('src', seleteLang[0])
+                $("#mainb").attr('src', seleteLang[1])
+                $("#mainc").attr('src', seleteLang[2])
+                $("#maind").attr('src', seleteLang[3])
                 $("#main_video").attr('src', seleteLang[4])
                 $("#cat").removeClass('select')
                 $("#kor").removeClass('select')
@@ -104,7 +163,10 @@
             $("#esp").click(function () {
                 seleteLang = espImage
 
-                $("#main").attr('src', seleteLang[pagerCount])
+                $("#maina").attr('src', seleteLang[0])
+                $("#mainb").attr('src', seleteLang[1])
+                $("#mainc").attr('src', seleteLang[2])
+                $("#maind").attr('src', seleteLang[3])
                 $("#main_video").attr('src', seleteLang[4])
                 $("#cat").removeClass('select')
                 $("#kor").removeClass('select')
@@ -113,70 +175,12 @@
             })
 
             $("#left_pager").click(function () {
-                left_page(true)
+                slider.goToPrevSlide();
             })
 
             $("#right_pager").click(function () {
-                right_page(true)
+                slider.goToNextSlide();
             })
-            
-            autoPager(pagerCount)
-
-            function autoPager(num, touch) {
-                var timeSet = 5000
-                
-                if (num == 4) {
-                    timeSet = 20000
-                }
-
-                if (!touch) {
-                    const autoTimer = setTimeout(function() {
-                        right_page(false)
-                    }, timeSet)
-                }
-            }
-
-            function left_page(touch) {
-                pagerCount -= 1;
-
-                if (pagerCount == -1) {
-                    pagerCount = catImage.length - 1
-                    console.log(pagerCount);
-                }
-
-                if (pagerCount === 4) {
-                    $("#main_video").css('display', 'block')
-                    $("#main").css('display', 'none')
-                    autoPager(pagerCount, touch)
-                } else {
-                    $("#main").css('display', 'block')
-                    $("#main_video").css('display', 'none')
-                    autoPager(pagerCount, touch)
-                }
-
-                $("#main").attr('src', seleteLang[pagerCount])
-            }
-
-            function right_page(touch) {
-                pagerCount += 1;
-
-                if (pagerCount == catImage.length) {
-                    pagerCount = 0
-                }
-
-                if (pagerCount === 4) {
-                    $("#main_video").css('display', 'block')
-                    $("#main").css('display', 'none')
-                    autoPager(pagerCount, touch)
-                } else {
-                    $("#main").css('display', 'block')
-                    $("#main_video").css('display', 'none')
-                    autoPager(pagerCount, touch)
-                }
-
-                $("#main").attr('src', seleteLang[pagerCount])
-            }
-
         </script>
     </body>
 </html>
