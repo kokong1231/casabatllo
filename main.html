@@ -9,13 +9,15 @@
     </head>
 
     <body>
+        <div class="loading" style="display: none;">Loading&#8230;</div>
+
         <div class="container">
             <div class="slider">
                 <img src='./images/cat/CAT-slide-01-HR.png' id="maina" style="display: block;" class="main_image">
                 <img src='./images/cat/CAT-slide-02-HR.png' id="mainb" style="display: block;" class="main_image">
                 <img src='./images/cat/CAT-slide-03-HR.png' id="mainc" style="display: block;" class="main_image">
                 <img src='./images/cat/CAT-slide-04-HR.png' id="maind" style="display: block;" class="main_image">
-                <video src='./images/cat/CAT_video_totem.mp4' id="main_video" loop class="main_image" autoplay muted>
+                <video src='./images/cat/CAT_video_totem.mp4' id="main_video" loop class="main_image" autoplay muted style="background-color: #1d60a3;">
             </div>
 
             <div style="display: none;" id="page">
@@ -124,54 +126,94 @@
             $("#cat").click(function () {
                 seleteLang = catImage
 
+                if (slider.getCurrentSlide() === 4 && $(".slider").children('video').attr('src') !== seleteLang[4]) {
+                    $(".loading").css('display', 'block')
+                }
+
                 $("#maina").attr('src', seleteLang[0])
                 $("#mainb").attr('src', seleteLang[1])
                 $("#mainc").attr('src', seleteLang[2])
                 $("#maind").attr('src', seleteLang[3])
-                $("#main_video").attr('src', seleteLang[4])
+                if ($(".slider").children('video').attr('src') !== seleteLang[4]) {
+                    $(".slider").children('video').attr('src', seleteLang[4])
+                }
                 $("#cat").addClass('select')
                 $("#kor").removeClass('select')
                 $("#eng").removeClass('select')
                 $("#esp").removeClass('select')
+
+                setTimeout(function () {
+                    $(".loading").css('display', 'none')
+                }, 1000)
             })
             $("#kor").click(function () {
                 seleteLang = korImage
 
+                if (slider.getCurrentSlide() === 4 && $(".slider").children('video').attr('src') !== seleteLang[4]) {
+                    $(".loading").css('display', 'block')
+                }
+
                 $("#maina").attr('src', seleteLang[0])
                 $("#mainb").attr('src', seleteLang[1])
                 $("#mainc").attr('src', seleteLang[2])
                 $("#maind").attr('src', seleteLang[3])
-                $("#main_video").attr('src', seleteLang[4])
+                if ($(".slider").children('video').attr('src') !== seleteLang[4]) {
+                    $(".slider").children('video').attr('src', seleteLang[4])
+                }
                 $("#cat").removeClass('select')
                 $("#kor").addClass('select')
                 $("#eng").removeClass('select')
                 $("#esp").removeClass('select')
+
+                setTimeout(function () {
+                    $(".loading").css('display', 'none')
+                }, 1000)
             })
             $("#eng").click(function () {
                 seleteLang = engImage
 
-                $("#maina").attr('src', seleteLang[0])
-                $("#mainb").attr('src', seleteLang[1])
-                $("#mainc").attr('src', seleteLang[2])
-                $("#maind").attr('src', seleteLang[3])
-                $("#main_video").attr('src', seleteLang[4])
-                $("#cat").removeClass('select')
-                $("#kor").removeClass('select')
-                $("#eng").addClass('select')
-                $("#esp").removeClass('select')
-            })
-            $("#esp").click(function () {
-                seleteLang = espImage
+                if (slider.getCurrentSlide() === 4 && $(".slider").children('video').attr('src') !== seleteLang[4]) {
+                    $(".loading").css('display', 'block')
+                }
 
                 $("#maina").attr('src', seleteLang[0])
                 $("#mainb").attr('src', seleteLang[1])
                 $("#mainc").attr('src', seleteLang[2])
                 $("#maind").attr('src', seleteLang[3])
-                $("#main_video").attr('src', seleteLang[4])
+                if ($(".slider").children('video').attr('src') !== seleteLang[4]) {
+                    $(".slider").children('video').attr('src', seleteLang[4])
+                }
+                $("#cat").removeClass('select')
+                $("#kor").removeClass('select')
+                $("#eng").addClass('select')
+                $("#esp").removeClass('select')
+
+                setTimeout(function () {
+                    $(".loading").css('display', 'none')
+                }, 1000)
+            })
+            $("#esp").click(function () {
+                seleteLang = espImage
+
+                if (slider.getCurrentSlide() === 4 && $(".slider").children('video').attr('src') !== seleteLang[4]) {
+                    $(".loading").css('display', 'block')
+                }
+
+                $("#maina").attr('src', seleteLang[0])
+                $("#mainb").attr('src', seleteLang[1])
+                $("#mainc").attr('src', seleteLang[2])
+                $("#maind").attr('src', seleteLang[3])
+                if ($(".slider").children('video').attr('src') !== seleteLang[4]) {
+                    $(".slider").children('video').attr('src', seleteLang[4])
+                }
                 $("#cat").removeClass('select')
                 $("#kor").removeClass('select')
                 $("#eng").removeClass('select')
                 $("#esp").addClass('select')
+
+                setTimeout(function () {
+                    $(".loading").css('display', 'none')
+                }, 1000)
             })
 
             $("#left_pager").click(function () {
